@@ -15,7 +15,7 @@ There's also a server.test.js which has some simple tests for the endpoints.
 
 To install dependencies:
 
-    npm install
+    cd backend && npm install
 
 To start the backend (will run at http://localhost:4000):
 
@@ -38,14 +38,14 @@ To run the automatic fixes for the linter:
     npm run lintfix
 
 
-## Web
+## App
 
 We use a class based App component for simplicity. Some engineers aren't familiar with hooks yet, and a decent amount of
 our codebase still uses class components because some components predate hooks.
 
 To install dependencies:
 
-    npm install
+    cd app && npm install
 
 To start the frontend (will open in the browser at http://localhost:3000):
 
