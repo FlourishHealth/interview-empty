@@ -1,0 +1,49 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
+    "start": "nodemon --ignore \"*.json\" server.js",
+    "lint": "eslint \"*.js\"",
+    "lintfix": "eslint --fix \"*.js\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.34"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "chai": "^4.3.6",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-ts-fullstack": "^0.1.1",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-lodash": "^7.4.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-native": "^3.11.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.0",
+    "supertest": "^6.2.2",
+    "typescript": "^4.6.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "ts-fullstack"
+    ],
+    "settings": {
+      "react": {
+        "version": "16.13.1"
+      }
+    }
+  }
+}
