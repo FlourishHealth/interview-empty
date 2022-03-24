@@ -19,7 +19,7 @@ app.get("/users", async (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT);
-  console.info("Listening on PORT 3000");
+  console.info(`Listening on PORT ${PORT}`);
 }
 
 module.exports = { app };
