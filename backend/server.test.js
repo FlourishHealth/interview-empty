@@ -7,15 +7,12 @@ const assert = chai.assert;
 
 // Use test data so we don't mess up the normal data.
 const USER_PATH = "./database/user.test.json";
-const SCHEDULE_PATH = "./database/schedule.test.json";
-setDBPaths(USER_PATH, SCHEDULE_PATH);
 
 describe("server tests", function () {
   let server;
   beforeEach(function () {
     // Copy fixtures over test database, so we restore it to the same point each run.
     fs.copyFileSync(`${USER_PATH}.fixture`, USER_PATH);
-    fs.copyFileSync(`${SCHEDULE_PATH}.fixture`, SCHEDULE_PATH);
     server = supertest(app);
   });
 
