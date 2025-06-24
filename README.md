@@ -1,60 +1,176 @@
-# Overview
+# Interview Application
 
-This is a bare bones version of our interview repo, so you can test that you can successfully download and run the 
-backend and frontend on your machine. You should be able to start the backend, then start the frontend, and have the
-frontend display the text "Hello Interviewee", which only happens after talking to the backend.
+## 📋 Table of Contents
 
-Note: This is very much simplified from our typical development environment. We didn't feel it necessary to complicate
-it with Typescript, yarn, our open source libraries, etc that make development smoother.
+- [Critical Files & Project Structure](#-critical-files--project-structure)
+- [Quick Start](#-quick-start)
+- [Available Commands](#-available-commands)
+- [Application Architecture](#-application-architecture)
+- [Testing](#-testing)
+- [Database Management](#-database-management)
+- [Troubleshooting](#-troubleshooting)
 
-## Backend
+## 🗂️ Critical Files & Project Structure
 
-The backend has 2 main components: server.js, which handles routing requests and acts as a controller, and db.js, which
-mimics a database (normally this would be mongoose talking to MongoDB, but we'll keep it simpler.)
-There's also a server.test.js which has some simple tests for the endpoints.
+Before diving in, here are the key files you'll need to know about:
 
-To install dependencies:
+### Backend
+- **`backend/src/server.ts`** - Main Express server with API endpoints and routing
+- **`backend/src/user.ts`** - User management and authentication logic
+- **`backend/src/loadDb.ts`** - Database initialization and fixture loading
 
-    cd backend && npm install
+### Frontend
+- **`frontend/app/patient/(tabs)/index.tsx`** - Patient dashboard for booking appointments
+- **`frontend/app/clinician/(tabs)/index.tsx`** - Clinician dashboard for viewing appointments
+- **`frontend/contexts/AuthContext.tsx`** - Authentication context and user session management
 
-To start the backend (will run at http://localhost:4000):
+## 🚀 Quick Start
 
-    npm run start
+### Prerequisites (macOS Setup)
 
-To run tests:
+1. **Install Node.js**
+   ```bash
+   # Using Homebrew (recommended)
+   brew install node@22
+   
+   # Verify installation
+   node --version
+   yarn --version
+   ```
 
-    npm run test
+2. **Install MongoDB**
+   ```bash
+   # Install MongoDB Community Edition
+   brew tap mongodb/brew
+   brew install mongodb-community
+   
+   # Start MongoDB service
+   brew services start mongodb/brew/mongodb-community
+   
+   # Verify MongoDB is running
+   mongosh --eval "db.adminCommand('ismaster')"
+   ```
 
-To run a specific test:
+3. **Install Yarn (if not already installed)**
+   ```bash
+   npm install -g yarn
+   ```
 
-    npm run test -t "creates schedule"
+### Installation & Setup
 
-To run the lint test:
+1. **Clone and install dependencies**
+   ```bash
+   # Install root dependencies
+   yarn install
+   
+   # Install backend dependencies
+   cd backend && yarn install
+   
+   # Install frontend dependencies
+   cd ../frontend && yarn install
+   ```
 
-    npm run lint
+2. **Set up the database**
+   ```bash
+   # From the `backend/` directory
+   yarn loaddb
+   ```
+   This command initializes your MongoDB database with sample users. **Use this command whenever you want to reset your database to a clean state.**
 
-To run the automatic fixes for the linter:
+3. **Start the applications**
+   
+   **Terminal 1 - Backend:**
+   ```bash
+   cd backend
+   yarn dev
+   ```
+   Backend runs at `http://localhost:9000`
+   
+   **Terminal 2 - Frontend:**
+   ```bash
+   cd frontend
+   yarn web
+   ```
+   Frontend runs at `http://localhost:8081`
 
-    npm run lintfix
+## 🔧 Available Commands
 
+### Backend Commands
+- `yarn dev` - Start development server with hot reload
+- `yarn test` - Run all tests
+- `yarn loaddb` - Load database fixtures and sample data
+- `yarn lint` - Check code style
+- `yarn lintfix` - Fix linting issues automatically
 
-## App
+### Frontend Commands
+- `yarn web` - Start web development server
+- `yarn android` - Run on Android device/emulator
+- `yarn ios` - Run on iOS device/simulator
+- `yarn start` - Start Expo development server (for mobile)
+- `yarn lint` - Check code style
+- `yarn lintfix` - Fix linting issues automatically
 
-We use a class based App component for simplicity. Some engineers aren't familiar with hooks yet, and a decent amount of
-our codebase still uses class components because some components predate hooks.
+## 🏗️ Application Architecture
 
-To install dependencies:
+This is a monorepo with two main components:
 
-    cd app && npm install
+1. **Backend** (`backend/`) - Node.js/Express API with MongoDB
+2. **Frontend** (`frontend/`) - React Native/Expo application with web support
 
-To start the frontend (will open in the browser at http://localhost:3000):
+### Authentication
+The app uses JWT-based authentication with two user types:
+- **Patients** - Can view and book available appointment slots
+- **Clinicians** - Can view patient details
 
-    npm run start
+### Database Schema
+- **Users** - Patient and clinician profiles
 
-To run the lint test:
+## 🧪 Testing
 
-    npm run lint
+### Backend Tests
+```bash
+cd backend
+yarn test
+```
 
-To run the automatic fixes for the linter:
+### Run Specific Tests
+```bash
+cd backend
+yarn test -t "gets users"
+```
 
-    npm run lintfix
+## 🔄 Database Management
+
+### Reset Database
+To completely reset your database with fresh sample data:
+```bash
+cd backend
+yarn loaddb
+```
+
+This is particularly useful when:
+- You encounter data inconsistencies
+- You want to start with a clean slate
+- You need to restore the original sample data
+
+## 🐛 Troubleshooting
+
+### MongoDB Connection Issues
+- Ensure MongoDB is running: `brew services start mongodb/brew/mongodb-community`
+- Check MongoDB status: `brew services list | grep mongodb`
+
+### Port Conflicts
+- Backend uses port 9000
+- Frontend uses port 8081
+- Make sure these ports are available
+
+### Common Issues
+- **Database connection errors**: Restart MongoDB service
+- **Port already in use**: Kill existing processes or use different ports
+- **Module not found**: Run `yarn install` in the respective directory
+- **Stale data**: Reset database using `yarn loaddb`
+
+---
+
+**Happy coding!** 🎉
+
